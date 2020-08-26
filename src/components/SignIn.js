@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes, { object } from 'prop-types';
 import { setAuthedUser } from '../actions/authedUser';
 
 class SignIn extends Component {
+  static propTypes = {
+    users: PropTypes.arrayOf(object).isRequired,
+    setAuthedUser: PropTypes.func.isRequired,
+  };
+
   state = {
     user: '',
   };
@@ -30,7 +36,7 @@ class SignIn extends Component {
       <div>
         <h2>Sign In</h2>
         <select onChange={this.userSelected} value={user}>
-          <option value="" defaultValue="">
+          <option value="" defaultValue="" disabled>
             Select User
           </option>
           {items}

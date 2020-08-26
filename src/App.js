@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { handleInitialData } from './actions/shared';
 import SignIn from './components/SignIn';
 import Home from './components/Home';
 import './App.css';
 
 class App extends Component {
+  static propTypes = {
+    authedUser: PropTypes.bool.isRequired,
+    handleInitialData: PropTypes.func.isRequired,
+  };
+
   componentDidMount() {
     this.props.handleInitialData();
   }
@@ -16,7 +22,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="app">
-          {authedUser === null ? (
+          {authedUser ? (
             <Route render={() => <SignIn />} />
           ) : (
             <Route exact path="/" component={Home} />
@@ -28,7 +34,7 @@ class App extends Component {
 }
 
 function mapStateToProps({ authedUser }) {
-  return { authedUser };
+  return { authedUser: authedUser === null };
 }
 
 function mapDispatchToProps(dispatch) {
