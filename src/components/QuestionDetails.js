@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { handleAnswer } from '../actions/shared';
 
 class QuestionDetails extends Component {
   state = {
@@ -12,6 +13,13 @@ class QuestionDetails extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const {
+      authedUser,
+      question: { id },
+      saveQuestionAnswer,
+    } = this.props;
+    const { selectedOption } = this.state;
+    saveQuestionAnswer({ authedUser, qid: id, answer: selectedOption });
   };
 
   render() {
@@ -60,11 +68,17 @@ class QuestionDetails extends Component {
   }
 }
 
-function mapStateToProps({ questions, users }, ownProps) {
+function mapStateToProps({ authedUser, questions, users }, ownProps) {
   const { question_id } = ownProps.match.params;
   const question = questions[question_id];
   const author = users[questions[question_id].author];
-  return { question, author };
+  return { authedUser, question, author };
 }
 
-export default connect(mapStateToProps)(QuestionDetails);
+function mapDispatchToProps(dispatch) {
+  return {
+    saveQuestionAnswer: (answer) => dispatch(handleAnswer(answer)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionDetails);

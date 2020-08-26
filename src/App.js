@@ -25,7 +25,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="app">
           {authedUser ? (
-            <Route render={() => <SignIn />} />
+            <Route exact path="/" component={SignIn} />
           ) : (
             <Fragment>
               <Navbar />

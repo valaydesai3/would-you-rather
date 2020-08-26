@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
   static propTypes = {
@@ -11,7 +12,7 @@ class Navbar extends Component {
     return (
       <div>
         <nav>
-          <a href="/">Home</a>
+          <Link to="/">Home</Link>
           <a href="/"> | New Question</a>
           <a href="/"> | Leader Board</a>
           <span>Hello, {authedUser.name}</span>
