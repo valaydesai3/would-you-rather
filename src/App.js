@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleInitialData } from './actions/shared';
-import Login from './components/Login';
+import SignIn from './components/SignIn';
 import Home from './components/Home';
 import './App.css';
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    this.props.handleInitialData();
   }
   render() {
     const { authedUser } = this.props;
@@ -17,7 +17,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="app">
           {authedUser === null ? (
-            <Route render={() => <Login />} />
+            <Route render={() => <SignIn />} />
           ) : (
             <Route exact path="/" component={Home} />
           )}
@@ -31,4 +31,10 @@ function mapStateToProps({ authedUser }) {
   return { authedUser };
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    handleInitialData: () => dispatch(handleInitialData()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
