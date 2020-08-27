@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { handleInitialData } from './actions/shared';
@@ -7,6 +7,7 @@ import SignIn from './components/SignIn';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import QuestionDetails from './components/QuestionDetails';
+import Leaderboard from './components/Leaderboard';
 import './App.css';
 
 class App extends Component {
@@ -25,15 +26,18 @@ class App extends Component {
       <BrowserRouter>
         <div className="app">
           {authedUser ? (
-            <Route exact path="/" component={SignIn} />
+            <Route render={() => <SignIn />} />
           ) : (
             <Fragment>
               <Navbar />
-              <Route exact path="/" component={Home} />
-              <Route
-                path="/questions/:question_id"
-                component={QuestionDetails}
-              />
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route
+                  path="/questions/:question_id"
+                  component={QuestionDetails}
+                />
+                <Route path="/leaderboard" component={Leaderboard} />
+              </Switch>
             </Fragment>
           )}
         </div>
