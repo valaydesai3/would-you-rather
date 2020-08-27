@@ -9,6 +9,7 @@ import Home from './components/Home';
 import QuestionDetails from './components/QuestionDetails';
 import Leaderboard from './components/Leaderboard';
 import NewQuestion from './components/NewQuestion';
+import NotFound from './components/NotFound';
 import './App.css';
 
 class App extends Component {
@@ -39,6 +40,7 @@ class App extends Component {
                 />
                 <Route path="/leaderboard" component={Leaderboard} />
                 <Route path="/add" component={NewQuestion} />
+                <Route component={NotFound} />
               </Switch>
             </Fragment>
           )}
