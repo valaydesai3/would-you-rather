@@ -17,7 +17,7 @@ class Navbar extends Component {
       <div>
         <nav>
           <Link to="/">Home</Link>
-          <a href="/"> | New Question</a>
+          <Link to="/add"> | New Question</Link>
           <Link to="/leaderboard"> | Leader Board</Link>
           <span>Hello, {authedUser.name}</span>
           <span>

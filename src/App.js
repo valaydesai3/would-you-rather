@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import QuestionDetails from './components/QuestionDetails';
 import Leaderboard from './components/Leaderboard';
+import NewQuestion from './components/NewQuestion';
 import './App.css';
 
 class App extends Component {
@@ -37,6 +38,7 @@ class App extends Component {
                   component={QuestionDetails}
                 />
                 <Route path="/leaderboard" component={Leaderboard} />
+                <Route path="/add" component={NewQuestion} />
               </Switch>
             </Fragment>
           )}
