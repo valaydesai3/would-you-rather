@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { handleAnswer } from '../actions/shared';
 import PollResults from './PollResults';
 
 class QuestionDetails extends Component {
+  static propTypes = {
+    authedUser: PropTypes.string.isRequired,
+    question: PropTypes.object.isRequired,
+    author: PropTypes.object.isRequired,
+  };
+
   state = {
     selectedOption: '',
   };

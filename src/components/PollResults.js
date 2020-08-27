@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class PollResults extends Component {
+  static propTypes = {
+    author: PropTypes.object.isRequired,
+    question: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
+  };
+
   render() {
     const { author, question, user } = this.props;
 
@@ -67,7 +74,6 @@ function mapStateToProps({ authedUser, questions, users }, ownProps) {
   const author = users[questions[qid].author];
   const user = users[authedUser];
   return {
-    authedUser,
     author,
     question,
     user,

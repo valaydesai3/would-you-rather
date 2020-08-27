@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Question extends Component {
+  static propTypes = {
+    question: PropTypes.object.isRequired,
+    author: PropTypes.object.isRequired,
+  };
+
   viewPoll = (e, qid) => {
     this.props.history.push(`/questions/${qid}`);
   };
+
   render() {
     const { question, author } = this.props;
     return (
@@ -37,7 +44,7 @@ class Question extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, questions, users }, { id }) {
+function mapStateToProps({ questions, users }, { id }) {
   return {
     question: questions[id],
     author: users[questions[id].author],
