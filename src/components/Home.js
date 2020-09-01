@@ -25,15 +25,6 @@ class Home extends Component {
             ))}
           </div>
         </Tabs>
-        {/* <p>Unanswered Questions</p>
-        {unansweredQuestions.map((item) => (
-          <Question key={item} id={item} />
-        ))}
-
-        <p>Answered Questions</p>
-        {answeredQuestions.map((item) => (
-          <Question key={item} id={item} />
-        ))} */}
       </div>
     );
   }

@@ -89,20 +89,101 @@
   font-weight: normal;
 }
 
+.tabs {
+  margin-top: 20px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+}
+
+.tab-content {
+  padding: 20px;
+}
+
 .tab-list {
+  max-width: 100%;
   border-bottom: 1px solid #ccc;
   padding-left: 0;
 }
 
 .tab-list-item {
+  width: 50%;
   display: inline-block;
   list-style: none;
   margin-bottom: -1px;
   padding: 0.5rem 0.75rem;
+  text-align: center;
 }
 
 .tab-list-active {
-  background-color: white;
+  color: #2a9d8f;
+  background-color: lightgray;
   border: solid #ccc;
   border-width: 1px 1px 0 1px;
+  font-weight: bold;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid lightgrey;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.card-header {
+  width: 100%;
+  border-bottom: 1px solid lightgrey;
+  background-color: lightgrey;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.card img {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+}
+
+.card-img {
+  display: flex;
+  max-height: 100%;
+  padding: 10px;
+  border-right: 1px solid lightgrey;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5px;
+}
+
+.card-content p {
+  margin: 0;
+}
+
+.card-content-label {
+  font-weight: bold;
+}
+
+.card-content-action {
+  width: 100%;
+  max-width: 100%;
+}
+
+.card-content-action button {
+  width: 100%;
+  background-color: #fff;
+  outline: none;
+  border: 1px solid #2a9d8f;
+  padding: 5px;
+  font-weight: bold;
+  color: #2a9d8f;
+  border-radius: 5px;
+  cursor: pointer;
 }

@@ -16,28 +16,23 @@ class Question extends Component {
   render() {
     const { question, author } = this.props;
     return (
-      <div
-        style={{
-          maxWidth: '200px',
-          border: '2px solid indigo',
-          padding: '10px',
-          margin: '10px',
-        }}
-      >
-        <h3>{author.name} asks:</h3>
-        <div>
-          <img
-            src={author.avatarURL}
-            alt="avatar"
-            style={{ height: '64px', width: '64px', borderRadius: '50%' }}
-          />
+      <div className="card">
+        <div className="card-header">{author.name} asks:</div>
+        <div className="card-img">
+          <img src={author.avatarURL} alt="avatar" />
         </div>
-        <div>
-          <span>Would you rather...</span>
-          <h3>{question.optionOne.text}</h3>
-          <button onClick={(e) => this.viewPoll(e, question.id)}>
-            View Poll
-          </button>
+        <div className="card-content">
+          <p className="card-content-label">Would you rather...</p>
+          <p>
+            {`...`}
+            {question.optionOne.text.substr(0, 10)}
+            {`...`}
+          </p>
+          <div className="card-content-action">
+            <button onClick={(e) => this.viewPoll(e, question.id)}>
+              View Poll
+            </button>
+          </div>
         </div>
       </div>
     );
