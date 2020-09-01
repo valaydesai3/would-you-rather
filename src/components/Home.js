@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes, { string } from 'prop-types';
+import Tabs from '../components/Tabs';
 import Question from './Question';
 
 class Home extends Component {
@@ -12,7 +13,19 @@ class Home extends Component {
     const { answeredQuestions, unansweredQuestions } = this.props;
     return (
       <div>
-        <p>Unanswered Questions</p>
+        <Tabs>
+          <div label="Unanswered Questions">
+            {unansweredQuestions.map((item) => (
+              <Question key={item} id={item} />
+            ))}
+          </div>
+          <div label="Answered Questions">
+            {answeredQuestions.map((item) => (
+              <Question key={item} id={item} />
+            ))}
+          </div>
+        </Tabs>
+        {/* <p>Unanswered Questions</p>
         {unansweredQuestions.map((item) => (
           <Question key={item} id={item} />
         ))}
@@ -20,7 +33,7 @@ class Home extends Component {
         <p>Answered Questions</p>
         {answeredQuestions.map((item) => (
           <Question key={item} id={item} />
-        ))}
+        ))} */}
       </div>
     );
   }
