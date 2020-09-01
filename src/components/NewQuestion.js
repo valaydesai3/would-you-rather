@@ -22,6 +22,7 @@ class NewQuestion extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    // add validations
     const { optionOne, optionTwo } = this.state;
     const { author, addQuestion } = this.props;
     addQuestion({ author, optionOneText: optionOne, optionTwoText: optionTwo });
@@ -41,6 +42,7 @@ class NewQuestion extends Component {
           type="text"
           name="optionOne"
           value={optionOne}
+          required
           placeholder="Enter Option One Text Here"
           onChange={this.handleChange}
         />
@@ -52,6 +54,7 @@ class NewQuestion extends Component {
           type="text"
           name="optionTwo"
           value={optionTwo}
+          required
           placeholder="Enter Option Two Text Here"
           onChange={this.handleChange}
         />
