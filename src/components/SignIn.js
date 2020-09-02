@@ -33,18 +33,18 @@ class SignIn extends Component {
       </option>
     ));
     return (
-      <div className="signIn">
-        <div className="signInHeader">
+      <div className="signin">
+        <div className="signin-header">
           <p className="welcome">Welcome to the Would You Rather App!</p>
           <p>Please sign in to continue</p>
         </div>
-        <div className="signInImageHolder">
-          <img className="signInImage" src="logo512.png" alt="logo" />
+        <div className="signin-image-holder">
+          <img className="signin-image" src="logo512.png" alt="logo" />
         </div>
-        <h2 className="signInLabel">Sign In</h2>
-        <div className="signInForm">
+        <h2 className="signin-label">Sign In</h2>
+        <div className="signin-form">
           <select
-            className="signInSelect"
+            className="signin-select"
             onChange={this.userSelected}
             value={user}
           >
@@ -54,7 +54,7 @@ class SignIn extends Component {
             {items}
           </select>
           <button
-            className="signInBtn"
+            className="signin-btn"
             disabled={user === ''}
             onClick={this.handleSubmit}
           >

@@ -8,31 +8,77 @@ class Navbar extends Component {
   static propTypes = {
     authedUser: PropTypes.object.isRequired,
   };
+  state = {
+    activeId: 'home',
+    toggleMenu: true,
+  };
   handleLogout = () => {
     this.props.setAuthedUser(null);
   };
+  handleClick = (event) => {
+    const id = event.target.id;
+    this.setState({ activeId: id, toggleMenu: true });
+  };
+  toggleMenu = () => {
+    this.setState({ toggleMenu: !this.state.toggleMenu });
+  };
   render() {
     const { authedUser } = this.props;
+    const { activeId, toggleMenu } = this.state;
+
     return (
-      <div>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/add"> | New Question</Link>
-          <Link to="/leaderboard"> | Leader Board</Link>
+      <nav className="navbar">
+        <div className="navbar-username">
           <span>Hello, {authedUser.name}</span>
           <span>
-            <img
-              src={authedUser.avatarURL}
-              alt="avatar"
-              style={{ width: '32px', height: '32px', borderRadius: '50%' }}
-            />
+            <img src={authedUser.avatarURL} alt="avatar" />
           </span>
-          <Link to="/" onClick={this.handleLogout}>
-            {' '}
-            | Logout
-          </Link>
-        </nav>
-      </div>
+        </div>
+        <a href="/#" className="toggle-button" onClick={this.toggleMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </a>
+        <div className={toggleMenu ? 'navbar-links' : 'navbar-links active'}>
+          <ul>
+            <li>
+              <Link
+                id="home"
+                to="/"
+                className={activeId === 'home' ? 'active' : null}
+                onClick={(event) => this.handleClick(event)}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                id="add"
+                to="/add"
+                className={activeId === 'add' ? 'active' : null}
+                onClick={(event) => this.handleClick(event)}
+              >
+                New Question
+              </Link>
+            </li>
+            <li>
+              <Link
+                id="leaderboard"
+                to="/leaderboard"
+                className={activeId === 'leaderboard' ? 'active' : null}
+                onClick={(event) => this.handleClick(event)}
+              >
+                Leader Board
+              </Link>
+            </li>
+            <li>
+              <Link id="logout" to="/" onClick={this.handleLogout}>
+                Logout
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
     );
   }
 }
