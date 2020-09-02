@@ -15,9 +15,11 @@ class Home extends Component {
       <div>
         <Tabs>
           <div label="Unanswered Questions">
-            {unansweredQuestions.map((item) => (
-              <Question key={item} id={item} />
-            ))}
+            {unansweredQuestions.length === 0
+              ? `You've answered all the questions.`
+              : unansweredQuestions.map((item) => (
+                  <Question key={item} id={item} />
+                ))}
           </div>
           <div label="Answered Questions">
             {answeredQuestions.map((item) => (
