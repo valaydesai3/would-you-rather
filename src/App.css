@@ -190,6 +190,11 @@
   cursor: pointer;
 }
 
+.card-content-action button:hover {
+  background-color: #2a9d8f;
+  color: white;
+}
+
 .navbar {
   display: flex;
   position: relative;
@@ -295,8 +300,26 @@
   .navbar-links.active {
     display: flex;
   }
+
+  .question-details,
+  .card {
+    max-width: 90%;
+    display: block;
+  }
 }
 
 .question-details {
   margin-top: 20px;
+}
+
+.question-details .card ul {
+  list-style: none;
+}
+
+.question-details .card ul li {
+  padding: 5px;
+}
+
+.question-details .card ul li label {
+  padding: 5px;
 }

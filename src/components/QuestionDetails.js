@@ -44,27 +44,31 @@ class QuestionDetails extends Component {
             </div>
             <div className="card-content">
               <p className="card-content-label">Would you rather...</p>
-              <p>
-                <input
-                  type="radio"
-                  name="options"
-                  value="optionOne"
-                  onChange={this.optionSelected}
-                />{' '}
-                {question.optionOne.text}
-              </p>
-              <p>
-                <input
-                  type="radio"
-                  name="options"
-                  value="optionTwo"
-                  onChange={this.optionSelected}
-                />{' '}
-                {question.optionTwo.text}
-              </p>
-              <div className="card-content-action">
-                <button onClick={this.handleSubmit}>Submit</button>
-              </div>
+              <ul>
+                <li>
+                  <input
+                    type="radio"
+                    name="options"
+                    value="optionOne"
+                    onChange={this.optionSelected}
+                  />
+                  <label htmlFor="options">{question.optionOne.text}</label>
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="options"
+                    value="optionTwo"
+                    onChange={this.optionSelected}
+                  />
+                  <label htmlFor="options">{question.optionTwo.text}</label>
+                </li>
+                <li>
+                  <div className="card-content-action">
+                    <button onClick={this.handleSubmit}>Submit</button>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         )}
