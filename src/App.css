@@ -323,3 +323,58 @@
 .question-details .card ul li label {
   padding: 5px;
 }
+
+.your-answer {
+  background-color: #e1f8f8;
+  color: #31bea5;
+  border: 1px solid #afc2c1;
+  position: relative;
+}
+
+.other-answer {
+  background-color: #f8f8f8;
+  border: 1px solid #e3e3e3;
+}
+
+.total-votes {
+  color: #000000;
+  font-weight: bold;
+}
+
+.pollresult-question {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  gap: 10px;
+}
+
+.progress-wrapper {
+  width: 100%;
+}
+
+.progress-bar {
+  background-color: #c8dcdc;
+  height: 25px;
+  border-radius: 5px;
+}
+
+.vote-badge {
+  position: absolute;
+  top: -10px;
+  color: #fff;
+  background-color: #e6b811;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  line-height: 15px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  z-index: 999;
+  padding-top: 3px;
+  right: -20px;
+}

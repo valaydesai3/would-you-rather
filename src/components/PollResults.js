@@ -16,52 +16,96 @@ class PollResults extends Component {
     const optionTwoVotes = question.optionTwo.votes.length;
     const totalVotes = optionOneVotes + optionTwoVotes;
     const userVote = user.answers[question.id];
+    const optionOnePercent = ((optionOneVotes * 100) / totalVotes).toFixed(2);
+    const optionTwoPercent = ((optionTwoVotes * 100) / totalVotes).toFixed(2);
+
+    const progressFillStyle = {
+      common: {
+        display: 'flex',
+        height: '25px',
+        backgroundColor: '#2fbfa5',
+        borderRadius: '5px',
+        color: '#fff',
+        alignItems: 'center',
+        fontSize: '12px',
+        paddingRight: '5px',
+      },
+      optionOne: {
+        width: `${optionOnePercent}%`,
+        justifyContent: optionOnePercent === '0.00' ? 'flex-start' : 'flex-end',
+      },
+      optionTwo: {
+        width: `${optionTwoPercent}%`,
+        justifyContent: optionTwoPercent === '0.00' ? 'flex-start' : 'flex-end',
+      },
+    };
 
     return (
-      <div
-        style={{
-          maxWidth: '200px',
-          border: '2px solid indigo',
-          padding: '10px',
-          margin: '10px',
-        }}
-      >
-        <h3>Asked by {author.name}</h3>
-        <div>
-          <img
-            src={author.avatarURL}
-            alt="avatar"
-            style={{ height: '64px', width: '64px', borderRadius: '50%' }}
-          />
+      <div className="card">
+        <div className="card-header">{author.name} asks:</div>
+        <div className="card-img">
+          <img src={author.avatarURL} alt="avatar" />
         </div>
-        <div>
-          <h4>Results:</h4>
-          <div
-            style={{ border: '1px solid gray', margin: '5px', padding: '5px' }}
-          >
-            {userVote === 'optionOne' && <i>Your vote</i>}
-            <p>Would you rather {question.optionOne.text}?</p>
-            <progress
-              value={((optionOneVotes * 100) / totalVotes).toFixed(2)}
-              max="100"
-            ></progress>
-            <p>
-              {optionOneVotes} out of {totalVotes}
-            </p>
-          </div>
-          <div
-            style={{ border: '1px solid gray', margin: '5px', padding: '5px' }}
-          >
-            {userVote === 'optionTwo' && <i>Your vote</i>}
-            <p>Would you rather {question.optionTwo.text}?</p>
-            <progress
-              value={((optionTwoVotes * 100) / totalVotes).toFixed(2)}
-              max="100"
-            ></progress>
-            <p>
-              {optionTwoVotes} out of {totalVotes}
-            </p>
-          </div>
+        <div className="card-content">
+          <ul className="pollresult">
+            <li>
+              <h4>Results:</h4>
+            </li>
+            <li>
+              <div
+                className={`pollresult-question ${
+                  userVote === 'optionOne' ? 'your-answer' : 'other-answer'
+                }`}
+              >
+                {userVote === 'optionOne' && (
+                  <div className="vote-badge">Your vote</div>
+                )}
+                <p>Would you rather {question.optionOne.text}?</p>
+                <div className="progress-wrapper">
+                  <div className="progress-bar">
+                    <div
+                      style={{
+                        ...progressFillStyle.common,
+                        ...progressFillStyle.optionOne,
+                      }}
+                    >
+                      <span>{optionOnePercent}%</span>
+                    </div>
+                  </div>
+                </div>
+                <p className="total-votes">
+                  {optionOneVotes} out of {totalVotes} votes
+                </p>
+              </div>
+            </li>
+            <li>
+              <div
+                className={`pollresult-question ${
+                  userVote === 'optionTwo' ? 'your-answer' : 'other-answer'
+                }`}
+              >
+                {userVote === 'optionTwo' && (
+                  <div className="vote-badge">Your vote</div>
+                )}
+                <p>Would you rather {question.optionTwo.text}?</p>
+                <div className="progress-wrapper">
+                  <div className="progress-bar">
+                    <div
+                      style={{
+                        ...progressFillStyle.common,
+                        ...progressFillStyle.optionTwo,
+                      }}
+                    >
+                      <span>{optionTwoPercent}%</span>
+                    </div>
+                  </div>
+                </div>
+                <p className="total-votes">
+                  {optionTwoVotes} out of {totalVotes} votes
+                </p>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     );
