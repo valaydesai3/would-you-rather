@@ -34,32 +34,38 @@ class NewQuestion extends Component {
     return redirect ? (
       <Redirect to="/" />
     ) : (
-      <div>
-        <h2>Create New Question</h2>
-        <p>Complete the question:</p>
-        <h3>Would you rather...</h3>
-        <input
-          type="text"
-          name="optionOne"
-          value={optionOne}
-          required
-          placeholder="Enter Option One Text Here"
-          onChange={this.handleChange}
-        />
-        <br />
-        <p>
-          <b>OR</b>
-        </p>
-        <input
-          type="text"
-          name="optionTwo"
-          value={optionTwo}
-          required
-          placeholder="Enter Option Two Text Here"
-          onChange={this.handleChange}
-        />
-        <br />
-        <button onClick={this.handleSubmit}>Submit</button>
+      <div className="new-question-container">
+        <div className="new-question-form">
+          <h2>Create New Question</h2>
+          <p>Complete the question:</p>
+          <h3>Would you rather...</h3>
+          <fieldset>
+            <input
+              type="text"
+              name="optionOne"
+              value={optionOne}
+              required
+              placeholder="Enter Option One Text Here"
+              onChange={this.handleChange}
+            />
+          </fieldset>
+          <p>
+            <b>OR</b>
+          </p>
+          <fieldset>
+            <input
+              type="text"
+              name="optionTwo"
+              value={optionTwo}
+              required
+              placeholder="Enter Option Two Text Here"
+              onChange={this.handleChange}
+            />
+          </fieldset>
+          <fieldset>
+            <button onClick={this.handleSubmit}>Submit</button>
+          </fieldset>
+        </div>
       </div>
     );
   }
