@@ -14,23 +14,47 @@ class NewQuestion extends Component {
     optionOne: '',
     optionTwo: '',
     redirect: false,
+    errors: {},
   };
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  handleValidation = () => {
+    const { optionOne, optionTwo } = this.state;
+    let errors = {};
+    let formValid = true;
+
+    if (optionOne === '') {
+      errors['optionOne'] = 'Please Enter Option One';
+      formValid = false;
+    }
+    if (optionTwo === '') {
+      errors['optionTwo'] = 'Please Enter Option Two';
+      formValid = false;
+    }
+
+    this.setState({ errors: errors });
+    return formValid;
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
-    // add validations
     const { optionOne, optionTwo } = this.state;
     const { author, addQuestion } = this.props;
-    addQuestion({ author, optionOneText: optionOne, optionTwoText: optionTwo });
-    this.setState({ redirect: true });
+    if (this.handleValidation()) {
+      addQuestion({
+        author,
+        optionOneText: optionOne,
+        optionTwoText: optionTwo,
+      });
+      this.setState({ redirect: true });
+    }
   };
 
   render() {
-    const { optionOne, optionTwo, redirect } = this.state;
+    const { optionOne, optionTwo, redirect, errors } = this.state;
     return redirect ? (
       <Redirect to="/" />
     ) : (
@@ -48,6 +72,9 @@ class NewQuestion extends Component {
               placeholder="Enter Option One Text Here"
               onChange={this.handleChange}
             />
+            {errors.optionOne && (
+              <span className="error">{errors.optionOne}</span>
+            )}
           </fieldset>
           <p>
             <b>OR</b>
@@ -61,7 +88,11 @@ class NewQuestion extends Component {
               placeholder="Enter Option Two Text Here"
               onChange={this.handleChange}
             />
+            {errors.optionTwo && (
+              <span className="error">{errors.optionTwo}</span>
+            )}
           </fieldset>
+
           <fieldset>
             <button onClick={this.handleSubmit}>Submit</button>
           </fieldset>

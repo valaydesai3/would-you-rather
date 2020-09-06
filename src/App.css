@@ -428,4 +428,10 @@
   margin: 0 0 5px;
   padding: 10px;
   font-size: 15px;
+  outline: none;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
 }
