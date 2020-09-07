@@ -2,51 +2,44 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Leaderboard extends Component {
-  render() {
+  renderLeaderboard = () => {
     const { leaderboard } = this.props;
+
     return leaderboard.map((user) => (
-      <div
-        key={user.id}
-        style={{
-          maxWidth: '200px',
-          border: '2px solid indigo',
-          padding: '10px',
-          margin: '10px',
-        }}
-      >
-        <h3>{user.name}</h3>
-        <div>
-          <img
-            src={user.avatarURL}
-            alt="avatar"
-            style={{ height: '64px', width: '64px', borderRadius: '50%' }}
-          />
+      <div key={user.id} className="card">
+        <div className="card-img">
+          <img src={user.avatarURL} alt="avatar" />
         </div>
-        <div>
-          <div
-            style={{ border: '1px solid gray', margin: '5px', padding: '5px' }}
-          >
-            <p>
-              Answered questions <b>{user.questionsAnswered}</b>
-            </p>
-          </div>
-          <div
-            style={{ border: '1px solid gray', margin: '5px', padding: '5px' }}
-          >
-            <p>
-              Created questions <b>{user.questionsCreated}</b>
-            </p>
-          </div>
-          <div
-            style={{ border: '1px solid gray', margin: '5px', padding: '5px' }}
-          >
-            <p>
-              Score <b>{user.score}</b>
-            </p>
-          </div>
+        <div className="card-content">
+          <ul className="question-numbers">
+            <li>
+              <h3>{user.name}</h3>
+            </li>
+            <li className="label-counter">
+              <span>Answered questions</span>{' '}
+              <span className="counter">{user.questionsAnswered}</span>
+            </li>
+            <li className="label-counter">
+              <span>Created questions</span>
+              <span className="counter"> {user.questionsCreated}</span>
+            </li>
+          </ul>
+        </div>
+        <div className="card-content">
+          <ul className="score">
+            <li>
+              <p>Score</p>
+            </li>
+            <li>
+              <div className="counter score-badge">{user.score}</div>
+            </li>
+          </ul>
         </div>
       </div>
     ));
+  };
+  render() {
+    return <div className="leaderboard">{this.renderLeaderboard()}</div>;
   }
 }
 

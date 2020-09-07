@@ -306,6 +306,14 @@
     max-width: 90%;
     display: block;
   }
+
+  .card-img {
+    border-right: 0px;
+  }
+
+  .card-content ul {
+    border-right: 0px;
+  }
 }
 
 .question-details {
@@ -434,4 +442,70 @@
 .error {
   color: red;
   font-size: 12px;
+}
+
+.card-content ul {
+  list-style: none;
+  padding: 5px;
+}
+
+.card-content ul.question-numbers {
+  border-right: 1px solid #e2e2e2;
+}
+
+.card-content ul.question-numbers li {
+  padding: 5px;
+}
+
+.card-content ul.question-numbers li:nth-child(2) {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.card-content ul.question-numbers li.label-counter {
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card-content ul.question-numbers li.label-counter span:nth-child(2) {
+  padding-left: 20px;
+}
+
+.card-content ul.score {
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  padding: 0;
+  text-align: center;
+}
+
+.card-content ul.score li {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-content ul.score li:first-child {
+  background-color: #e2e2e2;
+}
+
+.leaderboard {
+  margin-top: 10px;
+}
+
+.leaderboard .counter {
+  font-weight: bold;
+}
+
+.leaderboard .score-badge {
+  background-color: #31bea7;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
