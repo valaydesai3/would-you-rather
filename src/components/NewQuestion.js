@@ -1,28 +1,25 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { handleQuestion } from '../actions/shared';
 
-class NewQuestion extends Component {
-  static propTypes = {
-    author: PropTypes.string.isRequired,
-    addQuestion: PropTypes.func.isRequired,
+const NewQuestion = (props) => {
+  const [optionOne, setOptionOne] = useState('');
+  const [optionTwo, setOptionTwo] = useState('');
+  const [redirect, setRedirect] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    if (e.target.name === 'optionOne') {
+      setOptionOne(e.target.value);
+    }
+    if (e.target.name === 'optionTwo') {
+      setOptionTwo(e.target.value);
+    }
   };
 
-  state = {
-    optionOne: '',
-    optionTwo: '',
-    redirect: false,
-    errors: {},
-  };
-
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  handleValidation = () => {
-    const { optionOne, optionTwo } = this.state;
+  const handleValidation = () => {
     let errors = {};
     let formValid = true;
 
@@ -35,72 +32,73 @@ class NewQuestion extends Component {
       formValid = false;
     }
 
-    this.setState({ errors: errors });
+    setErrors(errors);
     return formValid;
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { optionOne, optionTwo } = this.state;
-    const { author, addQuestion } = this.props;
-    if (this.handleValidation()) {
+    const { author, addQuestion } = props;
+    if (handleValidation()) {
       addQuestion({
         author,
         optionOneText: optionOne,
         optionTwoText: optionTwo,
       });
-      this.setState({ redirect: true });
+      setRedirect(true);
     }
   };
 
-  render() {
-    const { optionOne, optionTwo, redirect, errors } = this.state;
-    return redirect ? (
-      <Redirect to="/" />
-    ) : (
-      <div className="new-question-container">
-        <div className="new-question-form">
-          <h2>Create New Question</h2>
-          <p>Complete the question:</p>
-          <h3>Would you rather...</h3>
-          <fieldset>
-            <input
-              type="text"
-              name="optionOne"
-              value={optionOne}
-              required
-              placeholder="Enter Option One Text Here"
-              onChange={this.handleChange}
-            />
-            {errors.optionOne && (
-              <span className="error">{errors.optionOne}</span>
-            )}
-          </fieldset>
-          <p>
-            <b>OR</b>
-          </p>
-          <fieldset>
-            <input
-              type="text"
-              name="optionTwo"
-              value={optionTwo}
-              required
-              placeholder="Enter Option Two Text Here"
-              onChange={this.handleChange}
-            />
-            {errors.optionTwo && (
-              <span className="error">{errors.optionTwo}</span>
-            )}
-          </fieldset>
+  return redirect ? (
+    <Redirect to="/" />
+  ) : (
+    <div className="new-question-container">
+      <div className="new-question-form">
+        <h2>Create New Question</h2>
+        <p>Complete the question:</p>
+        <h3>Would you rather...</h3>
+        <fieldset>
+          <input
+            type="text"
+            name="optionOne"
+            value={optionOne}
+            required
+            placeholder="Enter Option One Text Here"
+            onChange={handleChange}
+          />
+          {errors.optionOne && (
+            <span className="error">{errors.optionOne}</span>
+          )}
+        </fieldset>
+        <p>
+          <b>OR</b>
+        </p>
+        <fieldset>
+          <input
+            type="text"
+            name="optionTwo"
+            value={optionTwo}
+            required
+            placeholder="Enter Option Two Text Here"
+            onChange={handleChange}
+          />
+          {errors.optionTwo && (
+            <span className="error">{errors.optionTwo}</span>
+          )}
+        </fieldset>
 
-          <fieldset>
-            <button onClick={this.handleSubmit}>Submit</button>
-          </fieldset>
-        </div>
+        <fieldset>
+          <button onClick={handleSubmit}>Submit</button>
+        </fieldset>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+NewQuestion.propTypes = {
+  author: PropTypes.string.isRequired,
+  addQuestion: PropTypes.func.isRequired,
+};
 
 function mapStateToProps({ authedUser }) {
   return {
