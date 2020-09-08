@@ -43,7 +43,7 @@ const Navbar = (props) => {
               id="home"
               to="/"
               className={activeId === 'home' ? 'active' : null}
-              onClick={(event) => handleClick(event)}
+              onClick={handleClick}
             >
               Home
             </Link>
@@ -53,7 +53,7 @@ const Navbar = (props) => {
               id="add"
               to="/add"
               className={activeId === 'add' ? 'active' : null}
-              onClick={(event) => handleClick(event)}
+              onClick={handleClick}
             >
               New Question
             </Link>
@@ -63,7 +63,7 @@ const Navbar = (props) => {
               id="leaderboard"
               to="/leaderboard"
               className={activeId === 'leaderboard' ? 'active' : null}
-              onClick={(event) => handleClick(event)}
+              onClick={handleClick}
             >
               Leader Board
             </Link>
