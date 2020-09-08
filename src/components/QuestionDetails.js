@@ -1,81 +1,94 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { handleAnswer } from '../actions/shared';
 import PollResults from './PollResults';
 
-class QuestionDetails extends Component {
-  static propTypes = {
-    authedUser: PropTypes.string.isRequired,
-    question: PropTypes.object.isRequired,
-    author: PropTypes.object.isRequired,
+const QuestionDetails = (props) => {
+  const { question, author, answer } = props;
+  const [selectedOption, setSelectedOption] = useState('');
+  const [error, setError] = useState('');
+
+  const optionSelected = (e) => {
+    setSelectedOption(e.target.value);
   };
 
-  state = {
-    selectedOption: '',
+  const handleValidation = () => {
+    let error = '';
+    if (selectedOption === '') {
+      error = 'Please select your answer';
+      setError(error);
+      return false;
+    }
+    return true;
   };
 
-  optionSelected = (e) => {
-    this.setState({ selectedOption: e.target.value });
-  };
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const {
       authedUser,
       question: { id },
       saveQuestionAnswer,
-    } = this.props;
-    const { selectedOption } = this.state;
-    saveQuestionAnswer({ authedUser, qid: id, answer: selectedOption });
+    } = props;
+    if (handleValidation()) {
+      saveQuestionAnswer({ authedUser, qid: id, answer: selectedOption });
+    }
   };
 
-  render() {
-    const { question, author, answer } = this.props;
-    return (
-      <div className="question-details">
-        {answer ? (
-          <PollResults id={question.id} />
-        ) : (
-          <div className="card">
-            <div className="card-header">{author.name} asks:</div>
-            <div className="card-img">
-              <img src={author.avatarURL} alt="avatar" />
-            </div>
-            <div className="card-content">
-              <p className="card-content-label">Would you rather...</p>
-              <ul>
-                <li>
-                  <input
-                    type="radio"
-                    name="options"
-                    value="optionOne"
-                    onChange={this.optionSelected}
-                  />
-                  <label htmlFor="options">{question.optionOne.text}</label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    name="options"
-                    value="optionTwo"
-                    onChange={this.optionSelected}
-                  />
-                  <label htmlFor="options">{question.optionTwo.text}</label>
-                </li>
-                <li>
-                  <div className="card-content-action">
-                    <button onClick={this.handleSubmit}>Submit</button>
-                  </div>
-                </li>
-              </ul>
-            </div>
+  return (
+    <div className="question-details">
+      {answer ? (
+        <PollResults id={question.id} />
+      ) : (
+        <div className="card">
+          <div className="card-header">{author.name} asks:</div>
+          <div className="card-img">
+            <img src={author.avatarURL} alt="avatar" />
           </div>
-        )}
-      </div>
-    );
-  }
-}
+          <div className="card-content">
+            <p className="card-content-label">Would you rather...</p>
+            <ul>
+              <li>
+                <input
+                  type="radio"
+                  name="options"
+                  value="optionOne"
+                  onChange={optionSelected}
+                />
+                <label htmlFor="options">{question.optionOne.text}</label>
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  name="options"
+                  value="optionTwo"
+                  onChange={optionSelected}
+                />
+                <label htmlFor="options">{question.optionTwo.text}</label>
+              </li>
+              {error && (
+                <li>
+                  <span className="error">{error}</span>
+                </li>
+              )}
+              <li>
+                <div className="card-content-action">
+                  <button onClick={handleSubmit}>Submit</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+QuestionDetails.propTypes = {
+  authedUser: PropTypes.string.isRequired,
+  question: PropTypes.object.isRequired,
+  author: PropTypes.object.isRequired,
+};
 
 function mapStateToProps({ authedUser, questions, users }, ownProps) {
   const { question_id } = ownProps.match.params;
